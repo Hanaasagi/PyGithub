@@ -27,9 +27,12 @@
 # along with PyGithub. If not, see <http://www.gnu.org/licenses/>.             #
 #                                                                              #
 ################################################################################
+from __future__ import unicode_literals
 
 import sys
 import os.path
+from io import open
+
 
 className, attributeName, attributeType = sys.argv[1:4]
 if len(sys.argv) > 4:
@@ -51,7 +54,7 @@ attributeDocType, attributeAssertType, attributeValue = types[attributeType]
 
 fileName = os.path.join("github", className + ".py")
 
-with open(fileName) as f:
+with open(fileName, 'r') as f:
     lines = list(f)
 
 newLines = []
@@ -136,6 +139,6 @@ while i < len(lines):
     i += 1
     newLines.append(line)
 
-with open(fileName, "wb") as f:
+with open(fileName, "w") as f:
     for line in newLines:
         f.write(line + "\n")
